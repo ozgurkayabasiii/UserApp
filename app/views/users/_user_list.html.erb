@@ -1,0 +1,20 @@
+<% if users.empty? %>
+  <div class="m-2 bg-white rounded shadow-lg p-4 w-full flex justify-center">
+    <h2 class="text-lg text-gray-800 font-semibold">Kullanıcı Bulunamadı!</h2>
+  </div>
+<% else %>
+  <% users.each do |user| %>
+    <div class="m-2 bg-white rounded shadow-lg p-4 w-full flex items-center">
+      <div class="w-1/6">
+        <%= image_tag user.profile_pic, alt: "#{user.name}'s Profile Picture", class: "w-12 h-12 rounded-full object-cover" %>
+      </div>
+      <div class="ml-4 flex-1">
+        <h2 class="text-lg text-gray-800 font-semibold"><%= user.name %></h2>
+        <h2 class="text-lg text-gray-800 font-semibold">@<%= user.username %></h2>
+      </div>
+      <%= link_to user_path(user), class: "text-blue-500 hover:text-blue-700" do %>
+        <i class="fas fa-edit"></i>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

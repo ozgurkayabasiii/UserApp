@@ -1,0 +1,58 @@
+<div class="container mx-auto mt-10 flex justify-between">
+  <div class="w-1/2 bg-white p-6 rounded-lg shadow-md relative">
+    <div class="absolute top-2 right-2">
+      <%= link_to "/users/#{@user.id}/edit", id: "edit_user_button", class: "bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center w-10 h-10", data: { modal_target: "edit_user_modal" } do %>
+      <i class="fas fa-pencil"></i>
+      <% end %>
+    </div>
+    <div class="text-center mb-4">
+      <%= image_tag @user.profile_pic, alt: "Profile Picture", class: "rounded-full w-32 h-32 mx-auto" %>
+    </div>
+    <div class="text-center mb-4">
+      <h2 class="text-2xl font-bold"><%= @user.name %></h2>
+      <p class="text-gray-600">@<%= @user.username %></p>
+      <p class="text-gray-600"><%= @user.email %></p>
+      <p class="text-gray-600"><%= @user.website %></p>
+    </div>
+    <div class="text-center">
+      <h3 class="text-xl font-semibold">Address</h3>
+      <% if @user.address.present? %>
+        <p class="text-gray-600"><%= @user.address.street %>, <%= @user.address.suite %></p>
+        <p class="text-gray-600"><%= @user.address.city %>, <%= @user.address.zipcode %></p>
+      <% else %>
+        <p class="text-gray-600">Address information is not available</p>
+      <% end %>
+    </div>
+    <div class="text-center mt-4">
+      <h3 class="text-xl font-semibold">Company</h3>
+      <% if @user.company.present? %>
+        <p class="text-gray-600"><%= @user.company.name %></p>
+      <% else %>
+        <p class="text-gray-600">Company information is not available</p>
+      <% end %>
+    </div>
+  </div>
+
+<div class="w-1/2 p-6 ml-4 bg-white rounded-lg shadow-md overflow-y-auto max-h-[600px]">
+    <h2 class="text-2xl font-bold mb-4">Albums</h2>
+    <% if @user.albums.any?%>
+    <% @user.albums.each do |album| %>
+      <div class="album mb-6 flex items-center">
+        <div class="w-1/6">
+          <%= image_tag album.album_details.first.thumbnail_url, alt: album.title, class: "w-full h-auto rounded-lg" %>
+        </div>
+        <div class="ml-4 w-5/6">
+          <h3 class="text-lg font-semibold">
+            <%= link_to album.title, album_path(album), class: "text-black-500 hover:underline", data: { modal_target: "album_detail_modal" } %>
+          </h3>
+        </div>
+      </div>
+    <% end %>
+    <%else%>
+      <p>No Albums available</p>
+    <%end%>
+  </div>
+
+
+<%= render 'shared/modal', modal_id: 'edit_user_modal' %>
+<%= render 'shared/modal', modal_id: 'album_detail_modal' %>

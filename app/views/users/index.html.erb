@@ -1,0 +1,22 @@
+<div class="flex flex-col items-center mt-10">
+  <div class="flex justify-between items-center w-full max-w-xl mb-4">
+    <h1 class="text-2xl font-bold">User List</h1>
+    <%= link_to "/users/new", id: "new_user_button", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center w-10 h-10", data: { modal_target: "new_user_modal" } do %>
+      <i class="fas fa-plus"></i>
+    <% end %>
+  </div>
+  <div>
+    <div class="flex items-center w-full max-w-xl">
+    <%= form_with url: search_users_path, method: :get, id: "search_form", class: "flex w-full" do |form| %>
+      <%= form.text_field :search, placeholder: "Search users...", class: "shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full", id: "search_input" %>
+      <button type="button" id="clear_search" class="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Clear</button>
+    <% end %>
+  </div>
+  <div id="search_results" class="flex flex-col items-center w-full max-w-xl mt-4">
+    <%= render partial: 'users/user_list', locals: { users: @users } %>
+  </div>
+  
+</div>
+
+
+<%= render 'shared/modal', modal_id: 'new_user_modal' %>

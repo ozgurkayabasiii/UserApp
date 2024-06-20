@@ -12,7 +12,16 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <header>
+      <div class="bg-gray-800">
+        <div class="container mx-auto px-4">
+          <div class="py-4 flex justify-center">
+            <a href="/" class="text-white text-xl font-bold">User App</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="container justify-center mx-auto mt-28 px-5 flex">
       <%= yield %>
     </main>
   </body>
